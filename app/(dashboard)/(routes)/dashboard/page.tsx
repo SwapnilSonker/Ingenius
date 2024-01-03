@@ -1,7 +1,10 @@
-import { Button } from "@/components/ui/button";
+import React from 'react'
 
-export default function Home() {
+const DashboardPage = () => {
   return (
-    <Button variant="default" >click here</Button>
-    )
+    <><div>DashboardPage (Protected)</div>
+    </>
+  )
 }
+
+export default DashboardPage
