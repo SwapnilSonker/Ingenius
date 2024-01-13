@@ -11,7 +11,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export const tools = [
+const tools = [
     {
     label: "Conversation",
     icon: MessageSquare,
