@@ -1,3 +1,4 @@
+import { checkSubscription } from "@/lib/subscription";
 import { checkApiLimit, increaseApiLimit } from "@/prisma/api-limit";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
@@ -28,7 +29,8 @@ export async function POST(
         }
 
         const freeTrial = await checkApiLimit();
-        if(!freeTrial){
+        const isPro = await checkSubscription();
+        if(!freeTrial && !isPro){
             return new NextResponse("Free trial has expired", { status: 403 });
         }
 
@@ -37,7 +39,9 @@ export async function POST(
             messages: [messages?.messages[messages?.messages.length - 1]],
         });
 
-        await increaseApiLimit();
+        if(!isPro){
+            await increaseApiLimit();
+        }
 
         return NextResponse.json(response.choices[0].message);
 

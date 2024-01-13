@@ -10,6 +10,7 @@ import { Check, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const ProModal = () => {
     const promodal = useProModal();
@@ -17,15 +18,15 @@ const ProModal = () => {
 
     const onSubscribe =async () => {
         try {
-            setLoading(true);
-            const response = await axios.get("/api/stripe");
+          setLoading(true);
+          const response = await axios.get("/api/stripe");
 
-            window.location.href = response.data.url;
+          window.location.href = response.data.url;
         } catch (error) {
-            console.log("STRIPE_CLIENT_ERROR" , error)
-        }
-        finally{
-            setLoading(false);
+          toast.error("Something went wrong");
+          console.log("STRIPE_CLIENT_ERROR", error);
+        } finally {
+          setLoading(false);
         }
     }
 
@@ -59,6 +60,7 @@ const ProModal = () => {
             </DialogHeader>
             <DialogFooter>
                 <Button
+                disabled={loading}
                 onClick={onSubscribe}
                 className="w-full"
                 variant="premium"

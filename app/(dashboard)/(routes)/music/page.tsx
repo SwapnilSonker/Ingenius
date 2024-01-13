@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const MusicPage = () => {
   const proModal = useProModal();
@@ -49,7 +50,10 @@ const MusicPage = () => {
       if(error?.response?.status === 403){
         proModal.onOpen();
       }
-      console.log(error);
+      else{
+        toast.error("Something went wrong");
+        console.log(error);
+      }
     } finally {
       router.refresh();
     }
