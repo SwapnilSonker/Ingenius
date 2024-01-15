@@ -67,7 +67,7 @@ const CodePage = () => {
     }
   };
 
-  
+  console.log("messages" , messages);
   return (
     <div>
       <Heading
