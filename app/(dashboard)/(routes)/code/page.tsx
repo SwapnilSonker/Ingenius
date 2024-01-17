@@ -117,7 +117,7 @@ const CodePage = () => {
             <Empty label="No conversation started" />
           )}
           <div className="flex flex-col-reverse gap-y-4">
-            {messages.map((message) => (
+            {messages.map((message : any) => (
               <div
                 key={message.content as string}
                 className={cn(
